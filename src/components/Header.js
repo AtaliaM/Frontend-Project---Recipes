@@ -12,7 +12,7 @@ class Header extends React.Component {
                 <div className="header-container">
                     <button><Link to="/">Home</Link></button>
                     <button><Link to="/recipes">Search recipes</Link></button>
-                    <button>saved recipes</button>
+                    <button><Link to="/savedrecipes">Saved Recipes</Link></button>
                 </div>
                 {/* <SearchDataForResults /> */}
             </>

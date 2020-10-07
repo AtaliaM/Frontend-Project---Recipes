@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import themealdb from '../apis/themealdb';
+// import ls from 'local-storage';
+import myLocalStorage from '../localStorage';
 
 const imageStyle = {
     width: "380px",
@@ -12,7 +14,7 @@ const imageStyle = {
 
 class RecipeDetails extends React.Component {
 
-    state = { currentRecipe: {}, ingredients: [], videoSrc : "" }
+    state = { currentRecipe: {}, ingredients: [], videoSrc: "", buttonDisable: false, buttonText: "Save Recipe" }
 
     componentDidMount() {
         this.fetchRecipe();
@@ -27,17 +29,20 @@ class RecipeDetails extends React.Component {
 
             this.fetchIngredients();
             this.fetchVideoSrc();
+            this.checkIfRecipeInLocalStorage();
 
         }
+
+        //to add an option of fetching recipe from local storage here//
+        //We will also be updating local storage whenever we add or delete a recipe.
 
     }
 
     fetchVideoSrc = () => {
         const youtube = `https://www.youtube.com/embed/`;
         const videoId = this.state.currentRecipe.strYoutube.slice(32,);
-        const videoSrc = youtube+videoId;
-        // console.log(videoSrc);
-        this.setState({videoSrc: videoSrc});
+        const videoSrc = youtube + videoId;
+        this.setState({ videoSrc: videoSrc });
     }
 
     fetchIngredients = () => {
@@ -47,7 +52,6 @@ class RecipeDetails extends React.Component {
         const ingredientsWithMeasures = []
 
         const temp = Object.entries(this.state.currentRecipe);
-        console.log(temp);
 
         for (let i = 0; i < temp.length; i++) {
             if (temp[i][0].includes("Ingredient") && temp[i][1] !== "") {
@@ -76,6 +80,36 @@ class RecipeDetails extends React.Component {
         }
     }
 
+    checkIfRecipeInLocalStorage = () => {
+        const savedRecipes = myLocalStorage.get("recipes") || [];
+        console.log(savedRecipes);
+        for (let i=0; i<savedRecipes.length; i++) {
+            if (savedRecipes[i].idMeal === this.state.currentRecipe.idMeal) {
+                this.setState({buttonDisable:true, buttonText: "Recipe Saved"});
+                break;
+            }
+        }
+    }
+
+    saveToLocalStorage = () => {
+
+        // const recipesfromStorage = myLocalStorage.get("recipes");
+        // const recipesParsed = JSON.parse(recipesfromStorage) || [];
+        // console.log(recipesParsed);
+        // const recipesList = [...recipesParsed];
+        // recipesList.push(this.state.currentRecipe);
+
+        // myLocalStorage.save("recipes", JSON.stringify(recipesList));
+        
+        // myLocalStorage.save("recipes", JSON.stringify(this.state.currentRecipe));
+        myLocalStorage.save("recipes", this.state.currentRecipe);
+        // const ttt = myLocalStorage.get("recipes");
+        this.setState({buttonDisable:true, buttonText: "Recipe Saved"});
+        // const recipes = myLocalStorage.get("recipes") || [];
+        
+
+    }
+
 
 
     render() {
@@ -90,13 +124,14 @@ class RecipeDetails extends React.Component {
                     {this.displayIngredients()}
                     <h3>-Instructions-</h3>
                     <h5 style={{ width: "55vw", margin: "auto", lineHeight: "27px" }}>{this.state.currentRecipe.strInstructions}</h5>
+                    <button disabled={this.state.buttonDisable} onClick={this.saveToLocalStorage} style={{ margin: "20px", width: "250px" }}>{this.state.buttonText}</button>
                     <h3>-YouTube-</h3>
                     <div>
                         <div className="ui embed">
                             <iframe title="video player" src={this.state.videoSrc} />
                         </div>
                     </div>
-                    <Link to={`/recipes`}>Back to recipes</Link>
+                    <Link style={{ fontSize: "18px" }} to={`/recipes`}>Back to recipes</Link>
                 </div>
             );
     }
