@@ -1,0 +1,34 @@
+.list-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.list {
+    height: 60vh;
+    max-height: fit-content;
+    width: 40vw;
+    background: cornsilk;
+    border: 2px solid black;
+    border-radius: 25px;
+}
+
+i {
+    margin-left: 7px;
+    cursor: pointer;
+}
+
+.ingredient {
+    margin: 5px;
+}
+
+.update-btn {
+    height: 30px;
+    margin: 10px;
+}
+
+.update-input {
+    height: 30px;
+    margin: 10px;
+}

@@ -14,7 +14,7 @@ const imageStyle = {
 
 class RecipeDetails extends React.Component {
 
-    state = { currentRecipe: {}, ingredients: [], videoSrc: "", buttonDisable: false, buttonText: "Save Recipe" }
+    state = { currentRecipe: {}, ingredientsMeasured: [], ingredients : [], videoSrc: "", buttonDisable: false, buttonText: "Save Recipe" }
 
     componentDidMount() {
         this.fetchRecipe();
@@ -62,19 +62,28 @@ class RecipeDetails extends React.Component {
             const tempstr = measures[i] + " " + ingredients[i];
             ingredientsWithMeasures.push(tempstr);
         }
-        // console.log(ingredientsWithMeasures);
-        this.setState({ ingredients: ingredientsWithMeasures });
+        this.setState({ ingredientsMeasured: ingredientsWithMeasures, ingredients : ingredients });
     }
 
     displayIngredients = () => {
-        if (this.state.ingredients.length !== 0) {
+        if (this.state.ingredientsMeasured.length !== 0) {
             return (
-                this.state.ingredients.map((ingrdient) => {
-                    return (<p key={ingrdient} style={{margin: "15px"}}>{ingrdient}
-                    <span class="glyphicon glyphicon-plus-sign" style={{marginLeft:"10px"}}></span></p>)
+                this.state.ingredientsMeasured.map((ingredient) => {
+
+                    return (<p key={ingredient} style={{margin: "15px"}}>{ingredient}
+                    <span onClick={()=>this.addIngredientToStorage(ingredient)} style={{marginLeft: "5px",cursor:"pointer"}}><i class="fas fa-plus-circle"></i></span></p>)
                 })
             )
         }
+    }
+
+    addIngredientToStorage = (ingredientName) =>{
+
+        console.log(ingredientName);
+        myLocalStorage.save("ingredients", ingredientName);
+
+        
+
     }
 
     checkIfRecipeInLocalStorage = () => {
@@ -108,7 +117,7 @@ class RecipeDetails extends React.Component {
                     <h3 style={{ margin: "10px" }}>Category: {this.state.currentRecipe.strCategory}</h3>
                     <h3 style={{ margin: "10px" }}>kitchen: {this.state.currentRecipe.strArea}</h3>
                     <h3>-Ingredients-</h3>
-                    <h5>Click <span class="glyphicon glyphicon-plus-sign" style={{margin:"0, 5px"}}></span> to add ingredient to shopping list</h5>
+                    <h5>Click <span style={{margin: "5px"}}><i class="fas fa-plus-circle"></i></span> to add ingredient to shopping list</h5>
                     {this.displayIngredients()}
                     <h3>-Instructions-</h3>
                     <h5 style={{ width: "55vw", margin: "auto", lineHeight: "27px" }}>{this.state.currentRecipe.strInstructions}</h5>
