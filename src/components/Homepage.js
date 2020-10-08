@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import SearchDataForResults from './SearchDataForResults';
+// import SearchDataForResults from './SearchDataForResults';
 //here Ill have searchDataforresults, 
 
 const Homepage = () => {

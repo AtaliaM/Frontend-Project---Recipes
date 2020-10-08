@@ -18,7 +18,6 @@ const MapResults = (props) => {
         <div style={{display:"flex", justifyContent: "center"}}>
             <div style={gridStyle}>
                 {data.meals.map((singleData) => {
-                    {/* console.log(singleData); */ }
                     return (
                         <div key={singleData.idMeal} style={{ width: "170px" }}>
                             <Link to={{pathname: `/recipes/${singleData.idMeal}`, obj: singleData}}>

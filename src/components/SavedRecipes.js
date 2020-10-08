@@ -16,7 +16,6 @@ class SavedRecipes extends React.Component {
     componentDidMount() {
         const recipes = myLocalStorage.get("recipes") || [];
         this.setState({savedRecipes : [...recipes]});
-        console.log(`recipes at fetchign time:${recipes}`);
     }
 
     removeFromSavedRecipes = (id) => {
@@ -58,7 +57,6 @@ class SavedRecipes extends React.Component {
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <div style={this.gridStyle}>
                         {this.state.savedRecipes.map((singleData) => {
-                            {/* console.log(singleData); */ }
                             return (
                                 <div key={singleData.idMeal} style={{ width: "170px" }}>
                                     <Link to={{ pathname: `/savedrecipes/${singleData.idMeal}`, obj: singleData }}>

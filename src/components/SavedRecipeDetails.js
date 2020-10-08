@@ -39,7 +39,6 @@ class SavedRecipeDetails extends React.Component {
     }
 
     fetchIngredients = () => {
-        let i = 1;
         const ingredients = []
         const measures = []
         const ingredientsWithMeasures = []
@@ -56,7 +55,7 @@ class SavedRecipeDetails extends React.Component {
         }
 
         for (let i = 0; i < ingredients.length; i++) {
-            const tempstr = `${measures[i]}` + " " + `${ingredients[i]}`;
+            const tempstr = measures[i] + " " + ingredients[i];
             ingredientsWithMeasures.push(tempstr);
         }
         // console.log(ingredientsWithMeasures);

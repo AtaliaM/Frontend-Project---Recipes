@@ -3,7 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import MapResults from './MapResults';
 import SearchBar from './SearchBar';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 class SearchDataForResults extends React.Component {
