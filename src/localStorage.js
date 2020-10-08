@@ -12,8 +12,7 @@ const myLocalStorage = {
         if (input) {
             input = JSON.parse(input);
             return input;
-            // localStorage.object = JSON.stringify(obj);  //Will ignore private members
-            // const parsed = JSON.parse(retrieved);
+            
         }
 
         

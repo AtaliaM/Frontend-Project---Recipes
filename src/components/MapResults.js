@@ -23,8 +23,8 @@ const MapResults = (props) => {
                         <div key={singleData.idMeal} style={{ width: "170px" }}>
                             <Link to={{pathname: `/recipes/${singleData.idMeal}`, obj: singleData}}>
                                 <div>
-                                    <h5 style={{ width: "fit-content" }}>{singleData.strMeal}</h5>
-                                    <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px" }}></img>
+                                    <h5 style={{ width: "fit-content", margin:"0 auto" }}>{singleData.strMeal}</h5>
+                                    <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px", marginTop:"10px" }}></img>
                                 </div>
                             </Link>
                         </div>

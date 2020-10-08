@@ -11,8 +11,9 @@ class Header extends React.Component {
             <>
                 <div className="header-container">
                     <button><Link to="/">Home</Link></button>
-                    <button><Link to="/recipes">Search recipes</Link></button>
+                    <button><Link to="/recipes">Search Recipes</Link></button>
                     <button><Link to="/savedrecipes">Saved Recipes</Link></button>
+                    <button><Link to="/shoppinglist">Shopping List</Link></button>
                 </div>
                 {/* <SearchDataForResults /> */}
             </>

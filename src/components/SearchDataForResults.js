@@ -37,7 +37,7 @@ class SearchDataForResults extends React.Component {
 
 
     sendDataToMap = () => {
-        console.log(this.state.illigal);
+        // console.log(this.state.illigal);
         if (this.state.recipes.length !== 0) {
             return (
                 <MapResults data={this.state.recipes} />

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import themealdb from '../apis/themealdb';
-// import ls from 'local-storage';
-import myLocalStorage from '../localStorage';
 
 const imageStyle = {
     width: "380px",
@@ -12,16 +10,18 @@ const imageStyle = {
 }
 
 
-class RecipeDetails extends React.Component {
+class SavedRecipeDetails extends React.Component {
 
-    state = { currentRecipe: {}, ingredients: [], videoSrc: "", buttonDisable: false, buttonText: "Save Recipe" }
+    state = { currentRecipe: {}, ingredients: [], videoSrc: "", }
 
     componentDidMount() {
         this.fetchRecipe();
+        console.log(this.props.match.params.id);
+
     }
 
     fetchRecipe = async () => {
-        if (this.props) {
+        
             const recipeId = this.props.match.params.id;
             const response = await themealdb.get(`/lookup.php?i=${recipeId}`);
             this.setState({ currentRecipe: response.data.meals[0] })
@@ -29,9 +29,6 @@ class RecipeDetails extends React.Component {
 
             this.fetchIngredients();
             this.fetchVideoSrc();
-            this.checkIfRecipeInLocalStorage();
-
-        }
     }
 
     fetchVideoSrc = () => {
@@ -77,27 +74,6 @@ class RecipeDetails extends React.Component {
         }
     }
 
-    checkIfRecipeInLocalStorage = () => {
-        const savedRecipes = myLocalStorage.get("recipes") || [];
-        console.log(savedRecipes);
-        // if (savedRecipes[0] !== null) {
-            for (let i = 0; i < savedRecipes.length; i++) {
-                if (savedRecipes[i].idMeal === this.state.currentRecipe.idMeal) {
-                    this.setState({ buttonDisable: true, buttonText: "Recipe Saved" });
-                    break;
-                }
-            }
-        // }
-    }
-
-    saveToLocalStorage = () => {
-
-        myLocalStorage.save("recipes", this.state.currentRecipe);
-
-        this.setState({ buttonDisable: true, buttonText: "Recipe Saved" });
-    }
-
-
 
     render() {
         if (this.state.currentRecipe !== {})
@@ -112,16 +88,15 @@ class RecipeDetails extends React.Component {
                     {this.displayIngredients()}
                     <h3>-Instructions-</h3>
                     <h5 style={{ width: "55vw", margin: "auto", lineHeight: "27px" }}>{this.state.currentRecipe.strInstructions}</h5>
-                    <button disabled={this.state.buttonDisable} onClick={this.saveToLocalStorage} style={{ margin: "20px", width: "250px", cursor: "pointer" }}>{this.state.buttonText}</button>
                     <h3>-YouTube-</h3>
                     <div>
                         <div className="ui embed">
                             <iframe title="video player" src={this.state.videoSrc} />
                         </div>
                     </div>
-                    <Link style={{ fontSize: "18px" }} to={`/recipes`}>Back to recipes</Link>
+                    <Link style={{ fontSize: "18px" }} to={`/savedrecipes`}>Back to saved recipes</Link>
                 </div>
             );
     }
 }
-export default RecipeDetails;
+export default SavedRecipeDetails;

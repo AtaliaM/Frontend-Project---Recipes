@@ -15,27 +15,40 @@ class SavedRecipes extends React.Component {
 
     componentDidMount() {
         const recipes = myLocalStorage.get("recipes") || [];
-        this.setState({savedRecipes : recipes});
+        this.setState({savedRecipes : [...recipes]});
+        console.log(`recipes at fetchign time:${recipes}`);
     }
 
     removeFromSavedRecipes = (id) => {
-        console.log(id);
-        console.log(this.state.savedRecipes);
-        let tempRecipes = this.state.savedRecipes;
-        console.log(tempRecipes);
+        let tempRecipes = [...this.state.savedRecipes];
+        // let tempRecipes = myLocalStorage.get("recipes");
+        // console.log(tempRecipes);
         let indexToRemove;
         for (let i=0; i<tempRecipes.length;i++) {
             if(tempRecipes[i].idMeal === id) {
                 indexToRemove = i;
+                tempRecipes.splice(indexToRemove,1);
                 break;
             }
         }
-        tempRecipes.splice(indexToRemove,1);
-        console.log(indexToRemove);
+        // console.log(tempRecipes, tempRecipes.length);
         myLocalStorage.remove("recipes");
 
-        myLocalStorage.save("recipes", ...tempRecipes);
-        this.setState({savedRecipes: tempRecipes});
+        //doing this logic so I won't have array with 'null' on local storage//
+        if (tempRecipes.length === 0) {
+            tempRecipes = [];
+            this.setState({savedRecipes : []});
+        }
+        else {
+            console.log("in elseee");
+            for (let i =0; i<tempRecipes.length; i++) {
+                myLocalStorage.save("recipes", tempRecipes[i]);
+            }
+            let t = myLocalStorage.get("recipes");
+            console.log(t);
+            this.setState({savedRecipes: [...tempRecipes]});
+        }
+
     }
 
 
@@ -50,11 +63,11 @@ class SavedRecipes extends React.Component {
                                 <div key={singleData.idMeal} style={{ width: "170px" }}>
                                     <Link to={{ pathname: `/savedrecipes/${singleData.idMeal}`, obj: singleData }}>
                                         <div>
-                                            <h5 style={{ width: "fit-content" }}>{singleData.strMeal}</h5>
-                                            <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px" }}></img>
+                                            <h5 style={{ width: "fit-content", margin:"0 auto" }}>{singleData.strMeal}</h5>
+                                            <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px", margin:"10px" }}></img>
                                         </div>
                                     </Link>
-                                    <button onClick={()=> this.removeFromSavedRecipes(singleData.idMeal)}>Remove from saved recipes</button>
+                                    <button onClick={()=> this.removeFromSavedRecipes(singleData.idMeal)} style={{cursor:"pointer"}}>Remove from saved recipes</button>
                                 </div>
                             )
                         })}
