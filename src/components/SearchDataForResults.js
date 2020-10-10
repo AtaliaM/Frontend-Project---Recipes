@@ -3,6 +3,7 @@ import React from 'react';
 import axios from 'axios';
 import MapResults from './MapResults';
 import SearchBar from './SearchBar';
+import './SearchDataForResults.css';
 // import { Link } from 'react-router-dom';
 
 
@@ -56,10 +57,10 @@ class SearchDataForResults extends React.Component {
 
     render() {
         return (
-            <>
+            <div>
                 <SearchBar fetchData={this.fetchRecipes} />
                 {this.sendDataToMap()}
-            </>
+            </div>
         )
     }
 }

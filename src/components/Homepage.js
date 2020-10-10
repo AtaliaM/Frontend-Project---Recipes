@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import SearchDataForResults from './SearchDataForResults';
-//here Ill have searchDataforresults, 
+import './Homepage.css';
 
 const Homepage = () => {
     return (
         <>
             <h1>Plan your meals</h1>
-            <button style={{width:"500px"}}><Link to="/recipes">Search for recipes</Link></button>
+            <div className="btn-container">
+                <button><Link to="/recipes">Search for recipes</Link></button>
+                <button><Link to="/random">Get a random recipe</Link></button>
+            </div>
         </>
 
     )

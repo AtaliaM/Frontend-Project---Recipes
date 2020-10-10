@@ -1,12 +1,17 @@
 .header-container {
-    height: 50px;
+    height: 60px;
     display: flex;
     background: lightblue;
     margin-bottom: 10px;
+    border-top: 1px solid black;
+    border-bottom: 3px double black;
+    border-right: 3px double black;
+    border-left: 3px double black;
 }
 
 
 button {
     margin: 10px 10px;
     padding: 5px;
+    height: 30px;
 }

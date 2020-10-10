@@ -7,11 +7,14 @@
 
 .list {
     height: 60vh;
-    max-height: fit-content;
-    width: 40vw;
-    background: cornsilk;
+    width: 45vw;
+    background: url("../note-2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
     border: 2px solid black;
     border-radius: 25px;
+    overflow-y: scroll;
+    padding: 20px;
 }
 
 i {
@@ -31,4 +34,10 @@ i {
 .update-input {
     height: 30px;
     margin: 10px;
+}
+
+h2 {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    margin: 20px;
 }

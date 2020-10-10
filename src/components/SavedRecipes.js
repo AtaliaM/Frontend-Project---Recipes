@@ -54,6 +54,8 @@ class SavedRecipes extends React.Component {
     render () {
         if (this.state.savedRecipes.length !== 0) {
             return (
+                <>
+                <h1 style={{fontFamily: "Pacifico, cursive"}}>Saved Recipes</h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <div style={this.gridStyle}>
                         {this.state.savedRecipes.map((singleData) => {
@@ -65,12 +67,13 @@ class SavedRecipes extends React.Component {
                                             <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px", margin:"10px" }}></img>
                                         </div>
                                     </Link>
-                                    <button onClick={()=> this.removeFromSavedRecipes(singleData.idMeal)} style={{cursor:"pointer"}}>Remove from saved recipes</button>
+                                    <button onClick={()=> this.removeFromSavedRecipes(singleData.idMeal)} style={{cursor:"pointer", width: "160px", height:"50px"}}>Remove from saved recipes</button>
                                 </div>
                             )
                         })}
                     </div>
                 </div>
+                </>
             );
         }
         else {

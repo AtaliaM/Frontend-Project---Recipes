@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import themealdb from '../apis/themealdb';
-// import ls from 'local-storage';
 import myLocalStorage from '../localStorage';
+import './RecipeDetails.css';
 
 const imageStyle = {
     width: "380px",
@@ -111,7 +111,7 @@ class RecipeDetails extends React.Component {
     render() {
         if (this.state.currentRecipe !== {})
             return (
-                <div style={{ display: "inline-block", width: "75vw", border: "1px solid black", margin: "10px", padding: "5px" }}>
+                <div className="recipe-container">
                     <h1>{this.state.currentRecipe.strMeal}</h1>
                     <img style={imageStyle} src={this.state.currentRecipe.strMealThumb} alt={this.state.currentRecipe.strMeal}></img>
                     <h3 style={{ margin: "10px" }}>Category: {this.state.currentRecipe.strCategory}</h3>
@@ -121,7 +121,7 @@ class RecipeDetails extends React.Component {
                     {this.displayIngredients()}
                     <h3>-Instructions-</h3>
                     <h5 style={{ width: "55vw", margin: "auto", lineHeight: "27px" }}>{this.state.currentRecipe.strInstructions}</h5>
-                    <button disabled={this.state.buttonDisable} onClick={this.saveToLocalStorage} style={{ margin: "20px", width: "250px", cursor: "pointer" }}>{this.state.buttonText}</button>
+                    <button className="save-btn" disabled={this.state.buttonDisable} onClick={this.saveToLocalStorage}>{this.state.buttonText}</button>
                     <h3>-YouTube-</h3>
                     <div>
                         <div className="ui embed">

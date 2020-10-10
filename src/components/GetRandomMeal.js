@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import themealdb from '../apis/themealdb';
 import myLocalStorage from '../localStorage';
-import './SavedRecipeDetails.css';
+import './GetRandomMeal.css';
 
 const imageStyle = {
     width: "380px",
@@ -12,25 +12,24 @@ const imageStyle = {
 }
 
 
-class SavedRecipeDetails extends React.Component {
+class GetRandomMeal extends React.Component {
 
-    state = { currentRecipe: {}, ingredientsMeasured: [], videoSrc: "", }
+    state = { currentRecipe: {}, ingredientsMeasured: [], ingredients : [], videoSrc: "", buttonDisable: false, buttonText: "Save Recipe" }
 
     componentDidMount() {
         this.fetchRecipe();
-        // console.log(this.props.match.params.id);
-
     }
 
     fetchRecipe = async () => {
-        
-            const recipeId = this.props.match.params.id;
-            const response = await themealdb.get(`/lookup.php?i=${recipeId}`);
-            this.setState({ currentRecipe: response.data.meals[0] })
-            console.log(this.state.currentRecipe);
+            const response = await themealdb.get(`/random.php`);
+            this.setState({ currentRecipe: response.data.meals[0] });
+            console.log(response);
 
             this.fetchIngredients();
             this.fetchVideoSrc();
+            this.checkIfRecipeInLocalStorage();
+
+        
     }
 
     fetchVideoSrc = () => {
@@ -41,6 +40,7 @@ class SavedRecipeDetails extends React.Component {
     }
 
     fetchIngredients = () => {
+        
         const ingredients = []
         const measures = []
         const ingredientsWithMeasures = []
@@ -60,32 +60,56 @@ class SavedRecipeDetails extends React.Component {
             const tempstr = measures[i] + " " + ingredients[i];
             ingredientsWithMeasures.push(tempstr);
         }
-        // console.log(ingredientsWithMeasures);
-        this.setState({ ingredientsMeasured: ingredientsWithMeasures, ingredients:ingredients });
+        this.setState({ ingredientsMeasured: ingredientsWithMeasures, ingredients : ingredients });
     }
 
     displayIngredients = () => {
         if (this.state.ingredientsMeasured.length !== 0) {
             return (
                 this.state.ingredientsMeasured.map((ingredient) => {
+
                     return (<p key={ingredient} style={{margin: "15px"}}>{ingredient}
-                    <span  onClick={()=>this.addIngredientToStorage(ingredient)} style={{marginLeft: "5px",cursor:"pointer"}}><i className="fas fa-plus-circle"></i></span></p>)
+                    <span onClick={()=>this.addIngredientToStorage(ingredient)} style={{marginLeft: "5px",cursor:"pointer"}}><i className="fas fa-plus-circle"></i></span></p>)
                 })
             )
         }
     }
 
     addIngredientToStorage = (ingredientName) =>{
-        myLocalStorage.save("ingredients", ingredientName);
+
         console.log(ingredientName);
+        myLocalStorage.save("ingredients", ingredientName);
+
+        
 
     }
+
+    checkIfRecipeInLocalStorage = () => {
+        const savedRecipes = myLocalStorage.get("recipes") || [];
+        console.log(savedRecipes);
+        // if (savedRecipes[0] !== null) {
+            for (let i = 0; i < savedRecipes.length; i++) {
+                if (savedRecipes[i].idMeal === this.state.currentRecipe.idMeal) {
+                    this.setState({ buttonDisable: true, buttonText: "Recipe Saved" });
+                    break;
+                }
+            }
+        // }
+    }
+
+    saveToLocalStorage = () => {
+
+        myLocalStorage.save("recipes", this.state.currentRecipe);
+
+        this.setState({ buttonDisable: true, buttonText: "Recipe Saved" });
+    }
+
 
 
     render() {
         if (this.state.currentRecipe !== {})
             return (
-                <div className="recipe-container">
+                <div className="recipe-container" >
                     <h1>{this.state.currentRecipe.strMeal}</h1>
                     <img style={imageStyle} src={this.state.currentRecipe.strMealThumb} alt={this.state.currentRecipe.strMeal}></img>
                     <h3 style={{ margin: "10px" }}>Category: {this.state.currentRecipe.strCategory}</h3>
@@ -95,15 +119,16 @@ class SavedRecipeDetails extends React.Component {
                     {this.displayIngredients()}
                     <h3>-Instructions-</h3>
                     <h5 style={{ width: "55vw", margin: "auto", lineHeight: "27px" }}>{this.state.currentRecipe.strInstructions}</h5>
+                    <button className="save-btn" disabled={this.state.buttonDisable} onClick={this.saveToLocalStorage}>{this.state.buttonText}</button>
                     <h3>-YouTube-</h3>
                     <div>
                         <div className="ui embed">
                             <iframe title="video player" src={this.state.videoSrc} />
                         </div>
                     </div>
-                    <Link style={{ fontSize: "18px" }} to={`/savedrecipes`}>Back to saved recipes</Link>
+                    <Link style={{ fontSize: "18px" }} to={`/recipes`}>Back to recipes</Link>
                 </div>
             );
     }
 }
-export default SavedRecipeDetails;
+export default GetRandomMeal;
