@@ -78,7 +78,7 @@ class SavedRecipes extends React.Component {
         }
         else {
             return (
-                <div style={{fontFamily: "Pacifico, cursive", fontSize:"40px", marginTop: "30px"}}>Save your recipes here! 😋</div>
+                <div style={{fontFamily: "Pacifico, cursive", fontSize:"40px", marginTop: "30px"}}>Save your recipes here! <span role="img" aria-label="xxxxx">😋</span></div>
             )
         }
 
