@@ -20,7 +20,7 @@ const Footer = () => {
     }
 
     return (
-        <footer style={style}>&copy; Created by Atalia Mucharsky <a href="https://github.com/AtaliaM" target="_blank" alt="github"><i className="fab fa-github"></i></a></footer>
+        <footer style={style}>&copy; Created by Atalia Mucharsky <a href="https://github.com/AtaliaM" target="_blank" rel="noopener noreferrer" alt="github"><i className="fab fa-github"></i></a></footer>
     )
 
 
