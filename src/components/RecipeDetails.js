@@ -117,7 +117,7 @@ class RecipeDetails extends React.Component {
                     <h3 style={{ margin: "10px" }}>Category: {this.state.currentRecipe.strCategory}</h3>
                     <h3 style={{ margin: "10px" }}>kitchen: {this.state.currentRecipe.strArea}</h3>
                     <h3>-Ingredients-</h3>
-                    <h5>Click <span style={{margin: "5px"}}><i class="fas fa-plus-circle"></i></span> to add ingredient to shopping list</h5>
+                    <h5>Click <span><i class="fas fa-plus-circle" style={{marginRight: "3px"}}></i></span> to add ingredient to shopping list</h5>
                     {this.displayIngredients()}
                     <h3>-Instructions-</h3>
                     <h5 style={{ width: "55vw", margin: "auto", lineHeight: "27px" }}>{this.state.currentRecipe.strInstructions}</h5>

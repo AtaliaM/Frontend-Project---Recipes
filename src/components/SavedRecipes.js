@@ -78,7 +78,7 @@ class SavedRecipes extends React.Component {
         }
         else {
             return (
-                <div>You didn't save any recipes yet</div>
+                <div style={{fontFamily: "Pacifico, cursive", fontSize:"40px", marginTop: "30px"}}>Save your recipes here! 😋</div>
             )
         }
 
