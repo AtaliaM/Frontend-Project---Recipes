@@ -10,7 +10,16 @@ class SavedRecipes extends React.Component {
     gridStyle = {
         display: "grid",
         gridTemplateColumns: "repeat(5, 200px)",
-        gridTemplateRows: "repeat(5, 200px)",
+        gridTemplateRows: "repeat(5, 270px)",
+    }
+
+    h5Style = {
+        width: "fit-content", 
+        margin:"0 auto", 
+        fontSize:"18px", 
+        color:"#492F18", 
+        fontWeight: "bold", 
+        backgroundColor: "white" ,
     }
 
     componentDidMount() {
@@ -63,8 +72,8 @@ class SavedRecipes extends React.Component {
                                 <div key={singleData.idMeal} style={{ width: "170px" }}>
                                     <Link to={{ pathname: `/savedrecipes/${singleData.idMeal}`, obj: singleData }}>
                                         <div>
-                                            <h5 style={{ width: "fit-content", margin:"0 auto" }}>{singleData.strMeal}</h5>
-                                            <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px", margin:"10px" }}></img>
+                                            <h5 style={this.h5Style}>{singleData.strMeal}</h5>
+                                            <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px", margin:"10px", border: "2px solid black" }}></img>
                                         </div>
                                     </Link>
                                     <button onClick={()=> this.removeFromSavedRecipes(singleData.idMeal)} style={{cursor:"pointer", width: "160px", height:"50px"}}>Remove from saved recipes</button>
