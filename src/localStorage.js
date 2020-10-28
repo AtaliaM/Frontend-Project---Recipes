@@ -1,10 +1,9 @@
 const myLocalStorage = {
     save: (key,value)=> {
-        
         const prevValue = JSON.parse(localStorage.getItem(key)) || [];
         const newValue = [...prevValue, value];
         localStorage.setItem(key, JSON.stringify(newValue));
-        console.log("in local");
+        // console.log("in local");
 
     },
     get: (key)=> {

@@ -124,24 +124,11 @@ class ShoppingList extends React.Component {
         let tempIngrediants = [...this.state.ingredients] || [];
         let newIngredient = this.state.currValueToSave;
 
-        // if (tempIngrediants.length > 0) {
-        //     myLocalStorage.remove("ingredients");
-        // }
+        myLocalStorage.save("ingredients", newIngredient);
+        myLocalStorage.get("ingredients");
+        tempIngrediants.push(newIngredient);
+        this.setState({ ingredients: [...tempIngrediants] });
 
-        // if (tempIngrediants.length === 0) {
-        //     tempIngrediants = [];
-        //     this.setState({ ingredients: [] });
-        // }
-        // else {
-        //     for (let i = 0; i < tempIngrediants.length; i++) {
-        //         myLocalStorage.save("ingredients", tempIngrediants[i]);
-        //     }
-            myLocalStorage.save("ingredients", newIngredient);
-            myLocalStorage.get("ingredients");
-            tempIngrediants.push(newIngredient);
-            this.setState({ ingredients: [...tempIngrediants] });
-            
-        // }
     }
 
     render() {
@@ -152,8 +139,8 @@ class ShoppingList extends React.Component {
                     <div className="list">
                         {this.renderIngredients()}
                     </div>
-                    <input type="text" value={this.state.currValueToSave} onChange={this.onInputChange2} style={{width:"290px", height:"30px", marginTop:"3px"}} />
-                    <button onClick={this.addNewIngredient} style={{marginBottom:"40px", marginTop:"5px"}}>Add ingredient</button>
+                    <input type="text" value={this.state.currValueToSave} onChange={this.onInputChange2} style={{ width: "290px", height: "30px", marginTop: "3px" }} />
+                    <button onClick={this.addNewIngredient} style={{ marginBottom: "40px", marginTop: "5px" }}>Add ingredient</button>
                 </div>
             )
         }
@@ -164,8 +151,8 @@ class ShoppingList extends React.Component {
                     <h2>-My shopping list-</h2>
                     <div className="list">
                     </div>
-                    <input type="text" value={this.state.currValueToSave} onChange={this.onInputChange2} style={{width:"290px", height:"30px", marginTop:"3px"}} />
-                    <button onClick={this.addNewIngredient} style={{marginBottom:"40px", marginTop: "5px"}}>Add ingredient</button>
+                    <input type="text" value={this.state.currValueToSave} onChange={this.onInputChange2} style={{ width: "290px", height: "30px", marginTop: "3px" }} />
+                    <button onClick={this.addNewIngredient} style={{ marginBottom: "40px", marginTop: "5px" }}>Add ingredient</button>
                 </div>
             )
         }

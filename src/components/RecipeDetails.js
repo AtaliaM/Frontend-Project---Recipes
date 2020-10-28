@@ -42,12 +42,11 @@ class RecipeDetails extends React.Component {
     }
 
     fetchIngredients = () => {
-        
         const ingredients = []
         const measures = []
         const ingredientsWithMeasures = []
-
         const temp = Object.entries(this.state.currentRecipe);
+        console.log(temp);
 
         for (let i = 0; i < temp.length; i++) {
             if (temp[i][0].includes("Ingredient") && temp[i][1] !== "" && temp[i][1] !== null) {
@@ -69,7 +68,6 @@ class RecipeDetails extends React.Component {
         if (this.state.ingredientsMeasured.length !== 0) {
             return (
                 this.state.ingredientsMeasured.map((ingredient) => {
-
                     return (<p key={ingredient} style={{margin: "15px"}}>{ingredient}
                     <span onClick={()=>this.addIngredientToStorage(ingredient)} style={{marginLeft: "5px",cursor:"pointer"}}><i className="fas fa-plus-circle"></i></span></p>)
                 })
@@ -78,34 +76,24 @@ class RecipeDetails extends React.Component {
     }
 
     addIngredientToStorage = (ingredientName) =>{
-
-        console.log(ingredientName);
+        // console.log(ingredientName);
         myLocalStorage.save("ingredients", ingredientName);
-
-        
-
     }
 
     checkIfRecipeInLocalStorage = () => {
         const savedRecipes = myLocalStorage.get("recipes") || [];
-        console.log(savedRecipes);
-        // if (savedRecipes[0] !== null) {
             for (let i = 0; i < savedRecipes.length; i++) {
                 if (savedRecipes[i].idMeal === this.state.currentRecipe.idMeal) {
                     this.setState({ buttonDisable: true, buttonText: "Recipe Saved" });
                     break;
                 }
-            }
-        // }
+            } 
     }
 
     saveToLocalStorage = () => {
-
         myLocalStorage.save("recipes", this.state.currentRecipe);
-
         this.setState({ buttonDisable: true, buttonText: "Recipe Saved" });
     }
-
 
 
     render() {
