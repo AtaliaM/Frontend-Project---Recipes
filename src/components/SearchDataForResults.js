@@ -18,7 +18,6 @@ class SearchDataForResults extends React.Component {
 
     fetchRecipes = async (ingredient) => {
         if (ingredient) {
-            console.log("innn");
             const response = await axios.get(`https://www.themealdb.com/api/json/v1/1/search.php?s=${ingredient}`);
 
             // console.log(response);

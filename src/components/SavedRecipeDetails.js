@@ -83,7 +83,6 @@ class SavedRecipeDetails extends React.Component {
 
 
     render() {
-        if (this.state.currentRecipe !== {})
             return (
                 <div className="recipe-container">
                     <h1>{this.state.currentRecipe.strMeal}</h1>

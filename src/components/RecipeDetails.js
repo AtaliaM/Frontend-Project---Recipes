@@ -46,7 +46,6 @@ class RecipeDetails extends React.Component {
         const measures = []
         const ingredientsWithMeasures = []
         const temp = Object.entries(this.state.currentRecipe);
-        console.log(temp);
 
         for (let i = 0; i < temp.length; i++) {
             if (temp[i][0].includes("Ingredient") && temp[i][1] !== "" && temp[i][1] !== null) {
@@ -97,7 +96,6 @@ class RecipeDetails extends React.Component {
 
 
     render() {
-        if (this.state.currentRecipe !== {})
             return (
                 <div className="recipe-container">
                     <h1>{this.state.currentRecipe.strMeal}</h1>
