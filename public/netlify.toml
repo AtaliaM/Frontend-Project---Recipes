@@ -1,3 +1,29 @@
 [[redirects]]
   from = "/random"
   to = "/random"
+
+[[redirects]]
+  from = "/"
+  to = "/"
+
+[[redirects]]
+  from = "/savedrecipes"
+  to = "/savedrecipes"
+
+[[redirects]]
+  from = "/savedrecipes/:id"
+  to = "/savedrecipes/:id"
+
+[[redirects]]
+  from = "/shoppinglist"
+  to = "/shoppinglist"
+
+
+[[redirects]]
+  from = "/recipes"
+  to = "/recipes"
+
+
+[[redirects]]
+  from = "/recipes/:id"
+  to = "/recipes/:id"
