@@ -64,7 +64,7 @@ class SavedRecipes extends React.Component {
         if (this.state.savedRecipes.length !== 0) {
             return (
                 <>
-                <h1 style={{fontFamily: "Pacifico, cursive"}}>Saved Recipes</h1>
+                <h1 style={{fontFamily: "Pacifico, cursive", marginBottom:"20px"}}>Saved Recipes</h1>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <div style={this.gridStyle}>
                         {this.state.savedRecipes.map((singleData) => {
