@@ -1,7 +1,5 @@
-///filter.php?c=Seafood
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MapResults from './MapResults';
 import themealdb from '../apis/themealdb';
 import "./MealsByCategories.css";
 
@@ -40,21 +38,14 @@ class MealsByCategory extends React.Component {
 
 
     render() {
-        if (this.state.chosenCategoryData.length !== 0) {
-            return (
-                <div className="categories-container">
-                    {this.displayCategories()}
-                    <MapResults data={this.state.recipes} />
-                </div>
-            )
-        }
-        else {
-            return (
+        return (
+            <div>
+                <h1>Categories</h1>
                 <div className="categories-container">
                     {this.displayCategories()}
                 </div>
-            )
-        }
+            </div>
+        )
     }
 
 }

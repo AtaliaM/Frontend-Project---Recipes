@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: repeat(7, 170px);
     grid-template-rows: repeat(5, 210px);
-    padding: 40px;
+    padding: 30px 40px;
 }
 
 .category-container {
@@ -19,4 +19,19 @@ img {
 
 img:hover {
     background-color: antiquewhite;
+}
+
+h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 40px;
+    margin: 0;
+}
+
+h4 {
+    width: fit-content;
+    margin:0 auto;
+    font-size:18px; 
+    color:#492F18;
+    font-weight: bold; 
+    background-color: white;
 }
