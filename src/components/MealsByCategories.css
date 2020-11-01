@@ -1,0 +1,22 @@
+.categories-container {
+    display: grid;
+    grid-template-columns: repeat(7, 170px);
+    grid-template-rows: repeat(5, 210px);
+    padding: 40px;
+}
+
+.category-container {
+    width: 140px;
+    height: 140px;
+}
+
+img {
+    width: 140px;
+    height: 140px;
+    margin-top: 10px;
+    border: 2px solid black ;
+}
+
+img:hover {
+    background-color: antiquewhite;
+}

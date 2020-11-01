@@ -68,7 +68,7 @@ class RecipeDetails extends React.Component {
             return (
                 this.state.ingredientsMeasured.map((ingredient) => {
                     return (<p key={ingredient} style={{margin: "15px"}}>{ingredient}
-                    <span onClick={()=>this.addIngredientToStorage(ingredient)} style={{marginLeft: "5px",cursor:"pointer"}}><i className="fas fa-plus-circle"></i></span></p>)
+                    <span onClick={()=>this.addIngredientToStorage(ingredient)} style={{marginLeft: "5px",cursor:"pointer"}}><i className="fas fa-plus-circle add-ingredient"></i></span></p>)
                 })
             )
         }

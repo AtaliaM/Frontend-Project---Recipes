@@ -9,6 +9,8 @@ import SavedRecipes from './components/SavedRecipes';
 import savedRecipeDetails from './components/SavedRecipeDetails';
 import ShoppingList from './components/ShoppingList';
 import GetRandomRecipe from './components/GetRandomMeal';
+import MealsByCategories from './components/MealsByCategories';
+import MealCategory from './components/MealCategory'
 import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends React.Component {
@@ -27,6 +29,8 @@ class App extends React.Component {
             <Route path="/savedrecipes/:id" component={savedRecipeDetails}/> 
             <Route path="/shoppinglist" component={ShoppingList}/>
             <Route path="/random" component={GetRandomRecipe}/>
+            <Route path="/mealsbycategory" exact component={MealsByCategories}/>
+            <Route path="/mealsbycategory/:category" exact component={MealCategory}/>
             <Footer/>
             {/* <SearchDataForResults /> */}
           </div>

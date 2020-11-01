@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import myLocalStorage from '../localStorage';
+import "./MapResults.css";
 
 
 const MapResults = (props) => {
 
     const data = props.data;
-    // console.log(data.meals);
+    console.log(data);
 
    const h5Style = {
         width: "fit-content", 
@@ -32,24 +33,21 @@ const MapResults = (props) => {
         display: "grid",
         gridTemplateColumns: "repeat(5, 200px)",
         gridTemplateRows: "repeat(5, 260px)",
+        paddingBottom: "30px"
     }
 
     const saveToLocalStorage = (meal) => {
         let recipeSaved;
-
         const savedRecipes = myLocalStorage.get("recipes") || [];
 
         for (let i = 0; i < savedRecipes.length; i++) {
             if (savedRecipes[i].idMeal === meal.idMeal) {
-
                 recipeSaved = true;
                 break;
             }
         }
-
         if (!recipeSaved) {
             myLocalStorage.save("recipes", meal);
-
         }
     }
 
@@ -66,7 +64,7 @@ const MapResults = (props) => {
                                     <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px", marginTop: "10px", border: "2px solid black" }}></img>
                                 </div>
                             </Link>
-                            <button style={buttonStyle} disabled={buttonInfo.buttonDisable} onClick={() => saveToLocalStorage(singleData)}>{buttonInfo.buttonText}</button>
+                            <button className="save-btn" style={buttonStyle} disabled={buttonInfo.buttonDisable} onClick={() => saveToLocalStorage(singleData)}>{buttonInfo.buttonText}</button>
                         </div>
                     )
                 })}
