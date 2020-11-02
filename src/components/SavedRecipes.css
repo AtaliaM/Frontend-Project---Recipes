@@ -1,14 +1,3 @@
-
-.save-btn:active {
-    background-color: #ADD8E6;
-    color:black;
-    outline: none;
-}
-
-button:focus {
-    outline: none;
-}
-
 .tooltip {
     position: relative;
     display: inline-block;

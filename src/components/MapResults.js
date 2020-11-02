@@ -8,6 +8,7 @@ const MapResults = (props) => {
 
     const data = props.data;
     console.log(data);
+    let longStrMeal;
 
    const h5Style = {
         width: "fit-content", 
@@ -56,11 +57,18 @@ const MapResults = (props) => {
         <div style={{ display: "flex", justifyContent: "center" }}>
             <div style={gridStyle}>
                 {data.meals.map((singleData) => {
+                    if (singleData.strMeal.length > 15) {
+                        longStrMeal = singleData.strMeal;
+                        singleData.strMeal = singleData.strMeal.slice(0,15)+ "...";
+                    }
+                    else {
+                        longStrMeal = "";
+                    }
                     return (
                         <div key={singleData.idMeal} style={{ width: "170px" }}>
                             <Link to={{ pathname: `/recipes/${singleData.idMeal}`, obj: singleData }}>
                                 <div>
-                                    <h5 style={h5Style}>{singleData.strMeal}</h5>
+                                    <h5 className="tooltip" style={h5Style}>{singleData.strMeal}<span className="tooltiptext">{longStrMeal || singleData.strMeal}</span></h5>
                                     <img src={singleData.strMealThumb} alt={singleData.strMeal} style={{ width: "150px", height: "150px", marginTop: "10px", border: "2px solid black" }}></img>
                                 </div>
                             </Link>
